@@ -1,6 +1,9 @@
-//2.À©Õ¹Å·¼¸ÀïµÂËã·¨
-// ·µ»Ø d = gcd(a, b)£¬²¢½â³öax+by=gcd(a,b)µÄ½â(x,y)
-// µİ¹é°æ
+/*****************************************************
+ * æ‰©å±•æ¬§å‡ é‡Œå¾·ç®—æ³•
+ *****************************************************/
+// è¿”å› d = gcd(a, b)ï¼Œå¹¶è§£å‡ºax+by=gcd(a,b)çš„è§£(x,y)
+
+// é€’å½’ç‰ˆ
 int extgcd(int a, int b, int &x, int &y) {
     int d = a;
     if (b) {
@@ -10,4 +13,19 @@ int extgcd(int a, int b, int &x, int &y) {
         x = 1; y = 0;
     }
     return d;
+}
+
+// éé€’å½’ç‰ˆ
+int extgcd(int a, int b, int &x, int &y) {
+	int x0 = 0, y0 = 1, x1 = 1, y1 = 0, q = 0, r = b;
+	b = a;
+	do {
+		x = x0 - q * x1; y = y0 - q * y1;
+		x0 = x1; y0 = y1;
+		x1 = x; y1 = y;
+		a = b; b = r;
+		r = a % b;
+		q = (a - r) / b;
+	} while (r);
+	return b;
 }
