@@ -43,3 +43,4 @@ int graham_scan(TPoint hull[], int n) {
     }
     return top;
 }
+ 
