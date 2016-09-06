@@ -54,3 +54,4 @@ int main()
 	cin>>n>>m>>p;
 	cout<<lucas(n,m,p)<<endl;
 }
+ 
