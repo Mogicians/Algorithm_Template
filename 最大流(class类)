@@ -31,15 +31,16 @@ template<class T>class isap
 		else
 		{
 			if(--vtn[dpth[u]]==0){dpth[s]=d;return;}
-			now[u]=N[u];v=d-1;
-			for(e=N[u];e;e=E[e].ne)if(E[e].cap&&dpth[E[e].vt]<v){v=dpth[E[e].vt];now[u]=e;}dpth[u]=v+1;++vtn[dpth[u]];
+			for(e=now[u]=N[u],v=d-1;e;e=E[e].ne)if(E[e].cap&&dpth[E[e].vt]<v)
+			{v=dpth[E[e].vt];now[u]=e;}dpth[u]=v+1;++vtn[dpth[u]];
 		}
 	}
 	T flow()
 	{	
 		int u,v,e;queue<int> q;
 		memset(dpth,0,sizeof(dpth));memset(vtn,0,sizeof(vtn));vtn[0]=1;q.push(t);
-		for(u=q.front();!q.empty();q.pop())for(e=N[u],v=E[e].vt;e;e=E[e].ne,v=E[e].vt)if(v!=t&&!dpth[v]){++vtn[dpth[v]=dpth[u]+1];q.push(v);}
+		for(;!q.empty();q.pop())for(u=q.front()，e=N[u],v=E[e].vt;e;e=E[e].ne,v=E[e].vt)
+		if(v!=t&&!dpth[v]){++vtn[dpth[v]=dpth[u]+1];q.push(v);}
 		while(dpth[s]<d){tflow=inf;found=false;sap(s);}
 		return maxflow;
 	}
