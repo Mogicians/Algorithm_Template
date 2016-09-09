@@ -47,6 +47,6 @@ template<class T>class isap
 
 int main()
 {
-  //可定义长整形流网络
+  //可定义浮点型、长整形流网络
   //建图时点下标范围在(s,t)内
 }
