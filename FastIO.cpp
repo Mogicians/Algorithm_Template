@@ -236,14 +236,14 @@ struct FastIO {
   }
   inline int rUInt() {
     int c = rChar(), x = 0;
-    if (c == -1) return 0;
+    if (eof) return 0;
     while (c <= 32) c = rChar();
     for (;'0' <= c && c <= '9'; c = rChar()) x = x * 10 + c - '0';
     return x;
   }
   inline int rInt() {
     int s = 1, c = rChar(), x = 0;
-    if (c == -1) return 0;
+    if (eof) return 0;
     while (c <= 32) c = rChar();
     if (c == '-') s = -1, c = rChar();
     for (; '0' <= c && c <= '9'; c = rChar()) x = x * 10 + c - '0';
@@ -251,7 +251,7 @@ struct FastIO {
   }
   inline void rStr(char *s) {
     int c = rChar();
-    if (c == -1) return;
+    if (eof) return;
     while (c <= 32) c = rChar();
     for(; c > 32; c = rChar()) *s++ = c;
     *s = 0;
