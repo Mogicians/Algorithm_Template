@@ -69,14 +69,14 @@ int main() {
 		for (int i = 1, u, v; i < n; ++i) {
 			scanf("%d %d", &u, &v);
 			AddEdge(u, v);
-			++deg[v];
+			++deg[v];			// 统计入度
 		}
-		for (rt = 1; deg[rt]; ++rt);
-		euler[tot++] = rt; pos[rt] = 0;
-		dfs(rt, -1);
-		RMQ_init();
+		for (rt = 1; deg[rt]; ++rt);		// 找到根结点(入度为0的点)
+		euler[tot++] = rt; pos[rt] = 0;		// 将根节点加入欧拉路径，并设置其在路径中首次出现的位置
+		dfs(rt, -1);				// 从根结点开始DFS
+		RMQ_init();				// 初始化ST表
 		scanf("%d %d", &x, &y);
-		printf("%d\n", LCA(x, y));
+		printf("%d\n", LCA(x, y));		// 查询
 	}
 	return 0;
 }
