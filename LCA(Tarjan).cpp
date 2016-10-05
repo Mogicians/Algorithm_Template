@@ -41,7 +41,7 @@ void TarjanLCA(int u) {
         	int v = egs[i].to;
         	if (!vis[v]) {
             		TarjanLCA(v);
-	            par[v] = u;
+			par[v] = u;
         	}
     	}
 }
