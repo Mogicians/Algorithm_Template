@@ -1,7 +1,7 @@
 /*********************** Template ***********************/
 int par[V], son[V], sz[V], depth[V], top[V], id[V], tot;
 
-void dfs1(int u, int fa) { // init: depth[rt]=0
+void dfs1(int u, int fa) { // init: depth[rt] = tot = 0
 	par[u] = fa; son[u] = -1; sz[u] = 1;
 	for (int i = eglist[u]; i; i = egs[i].nexteg) {
 		int v = egs[i].to;
