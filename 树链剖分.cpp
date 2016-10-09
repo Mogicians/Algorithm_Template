@@ -26,10 +26,10 @@ void dfs2(int u, int rt) {
 
 // sample
 void solve(int u, int v) { // u <-> v
-    while (top[u] != top[v]) {
-      if (depth[top[u]] < depth[top[v]]) swap(u, v);
-      update_or_query(id[top[u]], id[u]);
-      u = par[top[u]];
+	while (top[u] != top[v]) {
+		if (depth[top[u]] < depth[top[v]]) swap(u, v);
+    	update_or_query(id[top[u]], id[u]);
+    	u = par[top[u]];
     }
     if (depth[u] > depth[v]) swap(u, v);
     update_or_query(id[u], id[v]);
