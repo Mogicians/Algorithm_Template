@@ -20,7 +20,7 @@ void dfs(int u, int fa) {
 			dfs(v, u);
 			low[u] = min(low[u], low[v]);
 			if (low[v] >= dfn[u]) {
-				iscut[u] = true;
+				iscut[u] = true; // u是割点
 				bcc[++bcnt].clear();
 				while (1) {
 					Edge eg = sta.top(); sta.pop();
