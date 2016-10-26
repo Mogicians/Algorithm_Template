@@ -7,7 +7,7 @@ struct TwoSAT {
 		for (int i = 0, bnd = n << 1; i < bnd; ++i) G[i].clear();
 		memset(mark, false, sizeof(mark));
 	}
-	void add_clause(int x, int xval, int y, int yval) {
+	void add_clause(int x, int xval, int y, int yval) { // add clause: ( x=xval ∨ y=yval ) = True
 		x = x << 1 | xval, y = y << 1 | yval;
 		G[x ^ 1].push_back(y), G[y ^ 1].push_back(x);
 	}
