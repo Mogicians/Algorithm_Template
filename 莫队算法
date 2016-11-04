@@ -1,0 +1,66 @@
+// BZOJ 2038 小Z的袜子(hose)
+
+int n, m, block, num, cnt[N], a[N], l[N], r[N], belong[N];
+ll answer;
+
+struct Query {
+    int l, r, id, block;
+    bool operator < (const Query& a) const {
+        return block < a.block || (block == a.block && r < a.r);
+    }
+} q[N];
+
+struct Ans {
+    ll fz, fm;
+} ans[N];
+
+void build() {
+    clr(cnt, 0); answer = 0;
+    block = sqrt(1.0 * n);
+    num = n / block;
+    if (n % block) num++;
+    rep(i, 1, num + 1) {
+        l[i] = (i - 1) * block + 1;
+        r[i] = i * block;
+    }
+    r[num] = n;
+    rep(i, 1, n + 1) {
+        belong[i] = (i - 1) / block + 1;
+    }
+}
+
+void add(int p) {
+    answer += cnt[a[p]];
+    cnt[a[p]]++;
+}
+
+void remove(int p) {
+    answer -= cnt[a[p]] - 1;
+    cnt[a[p]]--;
+}
+
+int main() {
+    while (~scanf("%d %d", &n, &m)) {
+        build();
+        rep(i, 1, n + 1) scanf("%d", a + i);
+        rep(i, 1, m + 1) {
+            scanf("%d %d", &q[i].l, &q[i].r);
+            if (q[i].l > q[i].r) swap(q[i].l, q[i].r);
+            q[i].id = i; q[i].block = belong[q[i].l];
+        }
+        sort(q + 1, q + 1 + m);
+        int L = 1, R = 0;
+        rep(i, 1, m + 1) {
+            while (L < q[i].l) remove(L++);
+            while (L > q[i].l) add(--L);
+            while (R < q[i].r) add(++R);
+            while (R > q[i].r) remove(R--);
+            int id = q[i].id;
+            ans[id].fz = answer; ans[id].fm = (R - L + 1LL) * (R - L) / 2;
+            ll g = __gcd(ans[id].fz, ans[id].fm);
+            ans[id].fz /= g; ans[id].fm /= g;
+        }
+        rep(i, 1, m + 1) printf("%lld/%lld\n", ans[i].fz, ans[i].fm);
+    }
+    return 0;
+}
